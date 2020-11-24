@@ -1,0 +1,14 @@
+.header {
+  background-color: #000000;
+  height: 64px;
+  font-size: 40px;
+  color: white;
+  display: flex;
+  padding-left: 16px;
+}
+
+.searchBar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}

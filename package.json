@@ -2,6 +2,17 @@
   "name": "currency-rate-app",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szbihary/currency-rate-app.git"
+  },
+  "keywords": [
+    "exchange rate",
+    "currency",
+    "react"
+  ],
+  "author": "Szabolcs Bihary",
+  "license": "ISC",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",

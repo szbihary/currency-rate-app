@@ -1,0 +1,12 @@
+.searchContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: gray;
+  color: #fff;
+  padding: 8px;
+}
+
+.inputHeader {
+  font-size: 20px;
+  margin: 0 10px;
+}
