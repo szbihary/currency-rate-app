@@ -1,8 +1,35 @@
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   align-items: center;
   border: 1px solid #000;
   margin: 12px;
+  padding: 6px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.flag {
+  width: 35px;
+}
+
+.flagImage {
+  width: 35px;
+  height: 24px;
+}
+
+.currencyCode {
+  width: 10vmin;
+  margin: 0 2vmin;
+  text-align: center;
+}
+
+.countryName {
+  width: fit-content;
+  flex-grow: 1;
+}
+
+.baseCurrency {
+  width: 40px;
+  margin-left: 10px;
 }

@@ -8,13 +8,25 @@ export default function CurrencyListItem(props) {
     exchangeRate,
     baseCurrency,
   } = props;
-  const flagURL = `./flags/${countryCode.toLowerCase()}.png`;
+
+  let flag;
+  if (countryCode) {
+    const flagURL = `./flags/${countryCode.toLowerCase()}.png`;
+    flag = <img className={styles.flagImage} alt="" src={flagURL} />;
+  } else {
+    flag = "";
+  }
   return (
     <div className={styles.container}>
-      <img alt={countryCode} src={flagURL} />
-      <div>{currencyCode}</div>
-      <div>{countryName}</div>
-      <div>{`${exchangeRate} ${baseCurrency}`}</div>
+      <div className={styles.flag}>{flag}</div>
+      <div className={styles.currencyCode}>{currencyCode}</div>
+      <div className={styles.countryName}>
+        {countryName ? countryName : "-"}
+      </div>
+      <div className={styles.rate}>
+        {exchangeRate ? exchangeRate.toFixed(2) : ""}
+      </div>
+      <div className={styles.baseCurrency}>{baseCurrency}</div>
     </div>
   );
 }
