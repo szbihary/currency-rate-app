@@ -11,6 +11,8 @@
 
 .flag {
   width: 35px;
+  display: flex;
+  align-items: center;
 }
 
 .flagImage {

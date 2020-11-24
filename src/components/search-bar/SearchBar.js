@@ -1,10 +1,23 @@
 import styles from "./searchBar.module.css";
 
-export default function SearchBar() {
+const searchLabel = "Search";
+const placeholder = "Search by currency";
+
+export default function SearchBar(props) {
+  const handleFilterTextChange = (e) => {
+    props.onFilterTextChange(e.target.value);
+  };
+
   return (
     <div className={styles.searchContainer}>
-      <div className={styles.inputHeader}>Search</div>
-      <input type="text" className={styles.input} />
+      <div className={styles.inputHeader}>{searchLabel}</div>
+      <input
+        type="text"
+        className={styles.input}
+        value={props.filterText}
+        onChange={handleFilterTextChange}
+        placeholder={placeholder}
+      />
     </div>
   );
 }

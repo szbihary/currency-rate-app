@@ -1,17 +1,14 @@
-import CurrencyList from "./components/currency-list/CurrencyList";
-import SearchBar from "./components/search-bar/SearchBar";
+import FilterableCurrencyList from "./components/filterable-currency-list/FilterableCurrencyList";
 import styles from "./App.module.css";
 
+const appTitle = "George FE Test";
+
 function App() {
-  const appTitle = "George FE Test";
   return (
-    <div className={styles.app}>
-      <header className={styles.header}>{appTitle}</header>
-      <div className={styles.searchBar}>
-        <SearchBar />
-      </div>
-      <CurrencyList />
-    </div>
+    <>
+      <header className={styles.appTitle}>{appTitle}</header>
+      <FilterableCurrencyList />
+    </>
   );
 }
 

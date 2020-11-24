@@ -24,7 +24,7 @@ export default function CurrencyListItem(props) {
         {countryName ? countryName : "-"}
       </div>
       <div className={styles.rate}>
-        {exchangeRate ? exchangeRate.toFixed(2) : ""}
+        {exchangeRate ? exchangeRate.toFixed(4) : "-"}
       </div>
       <div className={styles.baseCurrency}>{baseCurrency}</div>
     </div>
