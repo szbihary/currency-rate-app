@@ -5,6 +5,7 @@ export default function CurrencyListItem(props) {
     countryCode,
     countryName,
     currencyCode,
+    currencyName,
     exchangeRate,
     baseCurrency,
   } = props;
@@ -20,7 +21,12 @@ export default function CurrencyListItem(props) {
   return (
     <div className={styles.container}>
       <div className={styles.flag}>{flag}</div>
-      <div className={styles.currencyCode}>{currencyCode}</div>
+      <div
+        className={styles.currencyCode}
+        title={currencyName ? currencyName : currencyCode}
+      >
+        {currencyCode}
+      </div>
       <div className={styles.countryName} title={countryString}>
         {countryString}
       </div>
