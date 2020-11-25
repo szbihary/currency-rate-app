@@ -1,4 +1,5 @@
 import CurrencyListItem from "../currency-list-item/CurrencyListItem";
+import styles from "./currencyList.module.css";
 
 import countries from "../../mock/countries.json";
 import fxResult from "../../mock/fx.json";
@@ -28,6 +29,11 @@ export default function CurrencyList({ filterText }) {
       countryName: country ? country.countryName : null,
     };
   });
+
+  if (enhancedFxRates.length === 0) {
+    const noResultText = `No currency found with "${filterText}".`;
+    return <div className={styles.emptyText}>{noResultText}</div>;
+  }
 
   return enhancedFxRates.map((country) => (
     <CurrencyListItem

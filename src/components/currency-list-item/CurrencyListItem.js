@@ -16,12 +16,13 @@ export default function CurrencyListItem(props) {
   } else {
     flag = "";
   }
+  const countryString = countryName ? countryName : "-";
   return (
     <div className={styles.container}>
       <div className={styles.flag}>{flag}</div>
       <div className={styles.currencyCode}>{currencyCode}</div>
-      <div className={styles.countryName}>
-        {countryName ? countryName : "-"}
+      <div className={styles.countryName} title={countryString}>
+        {countryString}
       </div>
       <div className={styles.rate}>
         {exchangeRate ? exchangeRate.toFixed(4) : "-"}
