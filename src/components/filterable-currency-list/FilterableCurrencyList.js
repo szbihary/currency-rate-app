@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  useRouteMatch,
-  useParams,
-  useHistory,
-} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import qs from "query-string";
 import CurrencyList from "../currency-list/CurrencyList";
 import SearchBar from "../search-bar/SearchBar";
 
-function FilterableCurrencyList() {
-  const { param1 } = useParams();
-  const [filterText, setFilterText] = useState(param1);
+const QUERY_PATH = "search";
+const QUERY_PARAM_KEY = "currency";
 
-  useEffect(() => setFilterText(param1), [param1]);
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+export default function FilterableCurrencyList() {
+  const query = useQuery();
+  const paramValue = query.get(QUERY_PARAM_KEY) || "";
+
+  const [filterText, setFilterText] = useState(paramValue);
+
+  useEffect(() => setFilterText(paramValue), [paramValue]);
 
   const history = useHistory();
 
@@ -22,19 +26,19 @@ function FilterableCurrencyList() {
       <SearchBar
         filterText={filterText}
         onFilterTextChange={(value) => {
-          history.replace("/" + value);
+          let newURL;
+          if (value === "") {
+            newURL = "/";
+          } else {
+            newURL = qs.stringifyUrl({
+              url: `/${QUERY_PATH}`,
+              query: { [QUERY_PARAM_KEY]: value },
+            });
+          }
+          history.replace(newURL);
         }}
       />
       <CurrencyList filterText={filterText} />
     </>
-  );
-}
-
-export default function RoutedCurrencyList() {
-  const { path } = useRouteMatch();
-  return (
-    <Switch>
-      <Route path={`${path}:param1?`} component={FilterableCurrencyList} />
-    </Switch>
   );
 }
