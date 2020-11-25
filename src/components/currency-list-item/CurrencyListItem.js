@@ -1,4 +1,5 @@
 import styles from "./currencyListItem.module.css";
+import { BASE_CURRENCY } from "../../config";
 
 export default function CurrencyListItem(props) {
   const {
@@ -7,7 +8,6 @@ export default function CurrencyListItem(props) {
     currencyCode,
     currencyName,
     exchangeRate,
-    baseCurrency,
   } = props;
 
   let flag;
@@ -33,7 +33,7 @@ export default function CurrencyListItem(props) {
       <div className={styles.rate}>
         {exchangeRate ? exchangeRate.toFixed(4) : "-"}
       </div>
-      <div className={styles.baseCurrency}>{baseCurrency}</div>
+      <div className={styles.baseCurrency}>{BASE_CURRENCY}</div>
     </div>
   );
 }

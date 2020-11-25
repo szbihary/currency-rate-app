@@ -3,6 +3,7 @@ import { DebounceInput } from "react-debounce-input";
 
 const searchLabel = "Search";
 const placeholder = "Search by currency";
+const DEBOUNCE_TIMEOUT = 150; // ms
 
 export default function SearchBar(props) {
   const handleFilterTextChange = (event) => {
@@ -13,7 +14,7 @@ export default function SearchBar(props) {
     <div className={styles.searchContainer}>
       <div className={styles.inputHeader}>{searchLabel}</div>
       <DebounceInput
-        debounceTimeout={200}
+        debounceTimeout={DEBOUNCE_TIMEOUT}
         className={styles.input}
         value={props.filterText}
         onChange={handleFilterTextChange}
