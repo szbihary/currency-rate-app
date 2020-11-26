@@ -3,7 +3,10 @@ import { useHistory, useLocation } from "react-router-dom";
 import qs from "query-string";
 import CurrencyList from "../currency-list/CurrencyList";
 import SearchBar from "../search-bar/SearchBar";
-import { fetchFxRates } from "../../api/ratesApi";
+import styles from "./filterableCurrencyList.module.css";
+import mockFxResult from "../../mock/fx.json";
+// import { useRequest } from "../../api/apiUtils";
+// import { RATES_API_BASE_URL } from "../../config";
 
 const QUERY_PATH = "search";
 const QUERY_PARAM_KEY = "currency";
@@ -19,8 +22,14 @@ export default function FilterableCurrencyList() {
   const [filterText, setFilterText] = useState(paramValue);
   useEffect(() => setFilterText(paramValue), [paramValue]);
 
-  const [fxRates, setFxRates] = useState([]);
-  useEffect(() => fetchFxRates().then((data) => setFxRates(data.fx)), []);
+  // const { data, loading, error } = useRequest(RATES_API_BASE_URL);
+  // use mock data
+  const { data, loading, error } = {
+    data: mockFxResult,
+    loading: false,
+    error: {},
+  };
+  const fxRates = data.fx || [];
 
   const handleFilterTextChange = (value) => {
     let newURL;
@@ -35,6 +44,15 @@ export default function FilterableCurrencyList() {
     history.replace(newURL);
   };
 
+  if (loading) {
+    return <div className={styles.info}>Loading...</div>;
+  }
+  if (error.message) {
+    const errorMessage = `ERROR: Fetching data failed with error: "${error.message}"`;
+    return (
+      <div className={`${styles.info} ${styles.error}`}>{errorMessage}</div>
+    );
+  }
   return (
     <>
       <SearchBar
