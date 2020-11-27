@@ -13,13 +13,20 @@ export default function CurrencyListItem(props) {
   let flag;
   if (countryCode) {
     const flagURL = `./flags/${countryCode.toLowerCase()}.png`;
-    flag = <img className={styles.flagImage} alt="" src={flagURL} />;
+    flag = (
+      <img
+        data-testid="flag"
+        className={styles.flagImage}
+        alt=""
+        src={flagURL}
+      />
+    );
   } else {
     flag = "";
   }
   const countryString = countryName ? countryName : "-";
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="list-item">
       <div className={styles.flag}>{flag}</div>
       <div
         className={styles.currencyCode}

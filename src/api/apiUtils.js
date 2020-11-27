@@ -12,7 +12,7 @@ function handleError(error) {
   throw error;
 }
 
-export const useRequest = (initUrl) => {
+export const useFetch = (initUrl) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});

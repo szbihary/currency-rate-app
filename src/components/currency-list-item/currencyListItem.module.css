@@ -11,7 +11,8 @@
 }
 
 .flag {
-  width: 35px;
+  width: 15vmin;
+  min-width: 35px;
   display: flex;
   align-items: center;
 }
@@ -24,7 +25,6 @@
 .currencyCode {
   width: 20vmin;
   margin: 0 2vmin;
-  text-align: center;
 }
 
 .countryName {

@@ -5,7 +5,7 @@ import CurrencyList from "../currency-list/CurrencyList";
 import SearchBar from "../search-bar/SearchBar";
 import styles from "./filterableCurrencyList.module.css";
 import mockFxResult from "../../mock/fx.json";
-// import { useRequest } from "../../api/apiUtils";
+// import { useFetch } from "../../api/apiUtils";
 // import { RATES_API_BASE_URL } from "../../config";
 
 const QUERY_PATH = "search";
@@ -22,7 +22,7 @@ export default function FilterableCurrencyList() {
   const [filterText, setFilterText] = useState(paramValue);
   useEffect(() => setFilterText(paramValue), [paramValue]);
 
-  // const { data, loading, error } = useRequest(RATES_API_BASE_URL);
+  // const { data, loading, error } = useFetch(RATES_API_BASE_URL);
   // use mock data
   const { data, loading, error } = {
     data: mockFxResult,
@@ -58,6 +58,7 @@ export default function FilterableCurrencyList() {
       <SearchBar
         filterText={filterText}
         onFilterTextChange={handleFilterTextChange}
+        delayedTime={150}
       />
       <CurrencyList filterText={filterText} fxRates={fxRates} />
     </>
