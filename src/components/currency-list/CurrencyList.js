@@ -4,28 +4,24 @@ import countries from "../../mock/countries.json";
 
 const { country: countryList } = countries.countries;
 
-function filterFxRates(fxRates, filterString) {
-  return fxRates.filter((fx) => {
-    return (
-      !!fx.exchangeRate &&
-      (filterString ? fx.currency.includes(filterString) : true)
-    );
-  });
+export function filterCountries(countryList, filterString) {
+  return countryList.filter(
+    (country) =>
+      country.currencyCode.includes(filterString) ||
+      country.countryName.toLowerCase().includes(filterString.toLowerCase())
+  );
 }
 
-function enhanceFxRates(fxRates) {
-  return fxRates.map((currency) => {
-    const country = countryList.find(
-      (country) => country.currencyCode === currency.currency
+export function enhanceCountries(countries, fxRates) {
+  return countries.map((country) => {
+    const fxRate = fxRates.find(
+      (rate) => rate.currency === country.currencyCode
     );
     return {
-      currencyCode: currency.currency,
-      currencyName: currency.nameI18N,
-      exchangeRate: currency.exchangeRate
-        ? 1 / currency.exchangeRate.middle // middle rate is used
-        : null,
-      countryCode: country ? country.countryCode : null,
-      countryName: country ? country.countryName : null,
+      countryName: country.countryName,
+      countryCode: country.countryCode,
+      currencyCode: country.currencyCode,
+      exchangeRate: fxRate?.exchangeRate?.middle,
     };
   });
 }
@@ -33,15 +29,15 @@ function enhanceFxRates(fxRates) {
 export default function CurrencyList({ filterText, fxRates }) {
   const filterString = filterText ? filterText.toUpperCase() : "";
 
-  const filteredFxRates = filterFxRates(fxRates, filterString);
-  const enhancedFxRates = enhanceFxRates(filteredFxRates);
+  const enhancedCountryList = enhanceCountries(countryList, fxRates);
+  const filteredCountries = filterCountries(enhancedCountryList, filterString);
 
-  if (enhancedFxRates.length === 0) {
+  if (filteredCountries.length === 0) {
     const noResultText = `No currency found: "${filterText}"`;
     return <div className={styles.emptyText}>{noResultText}</div>;
   }
 
-  return enhancedFxRates.map((enhancedFxRate) => (
-    <CurrencyListItem {...enhancedFxRate} key={enhancedFxRate.currencyCode} />
+  return filteredCountries.map((enhancedFxRate) => (
+    <CurrencyListItem {...enhancedFxRate} key={enhancedFxRate.countryCode} />
   ));
 }
