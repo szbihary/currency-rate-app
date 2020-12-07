@@ -2,7 +2,7 @@ import FilterableCurrencyList from "./components/filterable-currency-list/Filter
 import styles from "./App.module.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const appTitle = "George FE Test";
+const appTitle = "Currency Rate App";
 
 function App() {
   return (

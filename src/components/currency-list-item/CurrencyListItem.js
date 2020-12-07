@@ -1,6 +1,26 @@
 import styles from "./currencyListItem.module.css";
 import { BASE_CURRENCY } from "../../config";
 
+function Flag({ countryCode }) {
+  const onError = (i) => {
+    i.target.style.display = "none";
+  };
+
+  if (countryCode) {
+    const flagURL = `./flags/${countryCode.toLowerCase()}.png`;
+    return (
+      <img
+        data-testid="flag"
+        className={styles.flagImage}
+        alt=""
+        src={flagURL}
+        onError={onError}
+      />
+    );
+  }
+  return "";
+}
+
 export default function CurrencyListItem(props) {
   const {
     countryCode,
@@ -10,24 +30,12 @@ export default function CurrencyListItem(props) {
     exchangeRate,
   } = props;
 
-  let flag;
-  if (countryCode) {
-    const flagURL = `./flags/${countryCode.toLowerCase()}.png`;
-    flag = (
-      <img
-        data-testid="flag"
-        className={styles.flagImage}
-        alt=""
-        src={flagURL}
-      />
-    );
-  } else {
-    flag = "";
-  }
   const countryString = countryName ? countryName : "-";
   return (
     <div className={styles.container} data-testid="list-item">
-      <div className={styles.flag}>{flag}</div>
+      <div className={styles.flag}>
+        <Flag countryCode={countryCode} />
+      </div>
       <div
         className={styles.currencyCode}
         title={currencyName ? currencyName : currencyCode}
